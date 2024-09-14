@@ -2,8 +2,8 @@ name: Deploy monthly or when pushed
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'v*'
   schedule:
     - cron: "0 0 1 * *"
 
@@ -19,6 +19,11 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/itk13201/texlive-ja
+          flavor: |
+            latest=true
+          tags: |
+            type=schedule,pattern={{date 'YYYYMMDD-hhmmss' tz='Asia/Tokyo'}}
+            type=ref,event=tag
       - name: Login to ghcr.io registry
         uses: docker/login-action@v3
         with:
