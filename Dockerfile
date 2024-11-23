@@ -28,7 +28,8 @@ RUN tlmgr install \
     txfonts \
     helvetic \
     wrapfig \
-    algorithms
+    algorithms \
+    physics
 
 
 # Production
